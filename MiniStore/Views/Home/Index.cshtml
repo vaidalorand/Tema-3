@@ -1,0 +1,49 @@
+﻿@model IEnumerable<MiniStore.Models.Product>
+
+@{
+    ViewBag.Title = "Index Home";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Login", "Login")
+</p>
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    <br> </br>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Add to Cart", "AddProductToCart", "Cart", new { id = item.Price }, null) |
+                @Html.ActionLink("Remove from Cart", "RemoveProductFromCart","Cart", new { id = item.Price },null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br> </br>
+@Html.ActionLink("View Cart", "Index","Cart")
+@Html.ActionLink("Export products in JSON format", "Export", "Home", new { type = "json"},null)
+@Html.ActionLink("Export products in CSV format", "Export", "Home", new { type = "csv" },null)
+
